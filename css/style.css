@@ -17,7 +17,7 @@
     --text-xs: 0.75rem;     /* extra small text*/
     --text-sm: 0.875rem;    /*small text*/
     --text-base: 1rem;      /*base size of text*/           
-    --text-lg: 1.25rem;     /*large size of text*/
+    --text-lg: 1.5rem;     /*large size of text*/
     --text-heading: clamp(2rem, 6vw, 4.5rem);   /*size of heading*/
     --text-display: clamp(3rem, 12vw, 9rem);    /*ssize of text display */
     /* rem is used to give size to the text, 1rem = 16px, it is used instead of px because if a user uses the browser with larger font sizes,
@@ -109,4 +109,58 @@ img{
     max-width: 100%;    /*stops an image from ever being wider than its container, prevents horizontal
     scrolling on phone*/
     display: block;     /*removes the small gap browsers leave under images */
+}
+/* HEADING */
+
+.site-header{   /*makes the header a flex row and draws a horizontal line using the border variable*/
+    display: flex;
+    border-bottom: var(--border);
+}
+.header-cell{   /*makes section itself a flex container for the different contents*/ 
+    display: flex;
+    align-items: center;
+    padding: var(--scale-2) var(--scale-3);     /*padding vertical horizontal*/
+}
+.header-cell + .header-cell{    /* to add adjacent selectors, to add vertical lines to seperate the contents
+    except the first, we can also use border-left for each but that would be more code */
+    border-left: var(--border);
+}
+.header-brand{  /*for the screan.q logo link*/
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    line-height: 1;
+    color: inherit; /*uses the color of the parent (the website) and changes the default blue color that a browser gives a link*/
+    text-decoration: none;  /*this removes the default underline that a browser gives to link*/
+    white-space: nowrap;    /*stops wrapping the name into more than 1 line*/
+    letter-spacing: -0.09em;
+    cursor: pointer;
+}
+.header-time{
+    flex: 1;
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;     /*makes every digit the same width so when the clock ticks it wont wobble */
+    cursor: pointer;
+}
+.header-button{     /*removes the light gray default button, no background, no border, inherited text color and font, 
+    small uppercase text with slightly spaced letters, and a pointer cursor*/
+    background: none;   
+    border: 0;
+    color: inherit;
+    font: inherit;
+    font-size: var(--text-sm);
+    letter-spacing: 0.008em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.header-button:hover{       /*for when mouse hovers on the button, it swaps the color of the button and text*/
+    background-color: var(--color-text);
+    color: var(--color-bg); 
+}
+.header-brand:hover{
+    background-color: var(--color-text);
+    color: var(--color-bg); 
+}
+.header-time:hover{
+    background-color: var(--color-text);
+    color: var(--color-bg); 
 }

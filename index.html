@@ -20,10 +20,16 @@
         <button class="header-cell header-button" id="theme-toggle" type="button">Light</button>    <!--introducing the button
         type button is used so that it isnt just a clickable link that takes us to another site
         it works with a keyboard whereas div doesnt, it stops the button from behaving like a submit button-->
-        <button class="header-cell header-button" id="theme-toggle" type="button" aria-label="Open navigation menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 7h18M3 12h18M3 17h18" fill="none" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
+        <button class="header-cell header-button" id="menu-button" aria-label="Open navigation menu"> <!--aria-label gives the 
+            button a spoken name-->
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">     <!--this is a tiny drawing in the code
+                viewbox makes a 24 x 24 drawing area , path d draws three horizontal lines M3 7 means move to x=3, y=7
+                h18 means a horizontal line 18 units to the right same for y=12 and y =17. aria hidden hides the icon from screen
+                readers since aria label already describes it.-->
+                <path d="M3 7h18M3 12h18M3 17h18" fill="none" stroke="currentColor" stroke-width="1.5"/>    <!--stroke currentcolor
+                uses the same color as the text to make the lines, so in dark mode the lines will automatically turn to white-->
+            </svg>      <!--why svg and not ☰ because the character's look depends on the font the visitor uses, svg makes it 
+            universal-->
         </button>
     </header>
     <main>      <!-- marks pages main content-->
