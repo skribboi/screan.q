@@ -1,0 +1,112 @@
+/* 1. DESIGN TOKENS(colors, fonts, sizes, spacing) */
+/* -- is used to declare variables btw */
+
+
+:root{      /* a selector that is the top level comment, which is <html>. any variables defined here are available on the entire page */
+    --color-bg: #ffffff;   /* page background (white)*/
+    --color-text: #000000;  /* black text*/
+    --color-text-muted: rgb(0 0 0 / 0.6);       /* is black at 60% opacity, which renders gray */
+    --color-line: #000000;      /*thin dividers, full length one */
+    --color-line-soft: rgb(0 0 0 / 0.2);        /*thin dividers, fainter version for minor divisions */
+
+    --font-display: "Archivo Black", "Arial Black", Impact, sans-serif; /*these three are font stacks, the one with spaces are supposed to
+    be in quotes. they are tried from left to right*/
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    
+    --text-xs: 0.75rem;     /* extra small text*/
+    --text-sm: 0.875rem;    /*small text*/
+    --text-base: 1rem;      /*base size of text*/           
+    --text-lg: 1.25rem;     /*large size of text*/
+    --text-heading: clamp(2rem, 6vw, 4.5rem);   /*size of heading*/
+    --text-display: clamp(3rem, 12vw, 9rem);    /*ssize of text display */
+    /* rem is used to give size to the text, 1rem = 16px, it is used instead of px because if a user uses the browser with larger font sizes,
+    rem will adjust the size hence being more user friendly */
+    /*vw is viewport width*/
+
+    --scale-1: 0.5rem;      /*declaring a set of scale variables to keep unformity in the site, so instead of coming
+                            up with values on the spot we use already declared ones like [var(--space-3)]*/
+    --scale-2: 1rem;
+    --scale-3: 1.5rem;
+    --scale-4: 2.5rem;
+    --scale-5: 8rem;
+    --scale-6: 6rem;
+
+    --border: 1px solid var(--color-line);    /*using it means having the same thickness and changes with the color theme*/
+    --border-soft: 1px solid var(--color-line-soft);  /* softer version of the one above */
+
+    --page-padding: clamp(1rem, 4vw, 3rem); /*gap between the content and the screen edge, 1 rem for phones 3 rem for laptops */
+    --page-max: 1600px; /*widest the content can get*/
+}
+
+:root[data-theme="dark"]{       /* dark theme settings, only need to change colors*/
+    --color-bg:#000000;
+    --color-text: #ffffff;
+    --color-text-muted: rgb(255 255 255 / 0.6);
+    --color-line: #ffffff; 
+    --color-line-soft: rgb(255 255 255 / 0.25);
+}
+
+/* 2. reset and base styles*/
+
+*,
+*::before,   /*selects everything and the comma means "all of these" */
+*::after {
+    box-sizing: border-box; /*changes how the width is counted. the padding and border are counted inside the given value
+    and stops the layout from overflowing*/
+}
+body{  /*css box model*/
+    margin: 0;      /* removes the default 8px margin around the page*/
+    background-color: var(--color-bg);      /* tokens are used to paint the page with the colors alotted to them */
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;   /*space between the lines of text, no unit is used to it adjusts to the different font sizes */
+    -webkit-font-smoothing: antialiased; /* makes light on dark text crisp on mac and ios, harmless elsewhere*/
+}
+
+/*HEADINGS*/
+h1, h2, h3{
+    margin: 0 0 var(--scale-2);
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.10em;    /*for bringing heading letters slightly closer to each other*/
+    text-transform: uppercase;
+}
+h1{font-size: clamp(3rem, 12vw, 9rem); }
+h2{font-size: clamp(1.75rem, 5vw, 3.5rem); }
+h3{font-size: 1.25rem; }
+
+p{
+    margin: 0 0 1em;
+    max-width: 60ch;    /* limits the length of the paragraph by 60 characters, one ch = the length of '0' */
+}
+.muted{     /*is a class selector that mutes any text with the class=mute property*/
+    color: var(--color-text-muted);
+}
+hr{     /* it is a hoizontal rule, we add that to replace the clunkyy default*/
+    border: 0;
+    border-top: 1px solid var(--color-line);
+    margin: 2rem 0; 
+}
+:focus-visible{     /*draws an outline for wherever the keyboard user has tabbed to*/
+    outline: 2px solid var(--text-base);
+    outline-offset: 3px;
+}
+.container{     /*keeps content alligned and centered*/
+    width: 100%;    /*makes it fill the screen on small windows*/
+    max-width: var(--page-max);     /*stops grwoing past page-max*/
+    margin-inline: auto;    /*splits left and right leftover spaces equally, which centeres the box, only works when width is limited.
+    That is why --max-width is important*/
+    padding-inline: var(--page-padding);    /*adds left and right gaps along the text direction*/
+}
+.section{   /*draws a full width line across the top of a section, and creates a vertical space inside it*/
+    border-top: var(--border);      /*uses the line variable*/
+    padding-block: var(--scale-5);  /*adds space above and below (block means top and bottom)*/
+}
+img{
+    max-width: 100%;    /*stops an image from ever being wider than its container, prevents horizontal
+    scrolling on phone*/
+    display: block;     /*removes the small gap browsers leave under images */
+}

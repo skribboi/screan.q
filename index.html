@@ -1,0 +1,46 @@
+<!DOCTYPE html> <!-- just use ! to start with the basic chunk of code -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sqrean.q</title> <!--title of the website-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">     <!--these three lines(7,9,10) are copied from google fonts to fetch the 
+    font style files before linking the css file, so the font is ready before the css starts running-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"> <!--linking the css file-->
+</head>
+<body>
+    <header class="site-header">    <!--semantic element for the top of the page-->
+        <a class="header-cell header-brand" href="index.html">screan.q</a>  <!--class links to the label in css
+        href.... names the site and its a link home-->
+        <div class="header-cell header-time" >
+            <time id="clock">00 Month 0000, 00:00:00</time>     <!--element for date and time-->
+        </div>
+        <button class="header-cell header-button" id="theme-toggle" type="button">Light</button>    <!--introducing the button
+        type button is used so that it isnt just a clickable link that takes us to another site
+        it works with a keyboard whereas div doesnt, it stops the button from behaving like a submit button-->
+        <button class="header-cell header-button" id="theme-toggle" type="button" aria-label="Open navigation menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 7h18M3 12h18M3 17h18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+        </button>
+    </header>
+    <main>      <!-- marks pages main content-->
+        <section class="section">   <!-- groups related content-->
+            <div class="container">     <!-- goes inside a section-->
+                <h1>Hello.</h1> <!--heading 1-->
+                <p>This text belongs to the first section</p>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <h2>Section Title</h2>
+                <p>This text belongs to the second section</p>
+                <p class="muted">This body is slightly muted, than the one above</p>
+            </div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>   <!--linking the javascript file-->
+</body>
+</html>
