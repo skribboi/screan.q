@@ -137,9 +137,10 @@ img{
 }
 .header-time{
     flex: 1;
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     font-variant-numeric: tabular-nums;     /*makes every digit the same width so when the clock ticks it wont wobble */
-    cursor: pointer;
+    font-family: var(--font-display);
+    flex-flow: column;  /*centres the time in the flex box*/
 }
 .header-button{     /*removes the light gray default button, no background, no border, inherited text color and font, 
     small uppercase text with slightly spaced letters, and a pointer cursor*/
@@ -147,8 +148,9 @@ img{
     border: 0;
     color: inherit;
     font: inherit;
+    font-family: var(--font-display);
     font-size: var(--text-sm);
-    letter-spacing: 0.008em;
+    letter-spacing: -0.05em;
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -160,7 +162,95 @@ img{
     background-color: var(--color-text);
     color: var(--color-bg); 
 }
-.header-time:hover{
+#theme-toggle{  /*is an id selector*/
+    min-width: 7rem;   /*width of the flex*/
+    justify-content: center;    /*centers the text*/
+}
+*,
+*::before,
+*::after {
+    transition: background-color 0.25s ease-in, color 0.25s ease-in, border-color 0.25s ease-in;     /*tells the browser to animate a transition
+    for those three properties for 0.25 seconds, so the theme changes smoothly and so does the hovering*/
+}
+@media (prefers-reduced-motion: reduce){    /*this is a media query, a condition that only applies its rules if the visitor's device 
+    matches, some people dont like animation and switch off animations in their system settings, this block honours that by switching
+    transitions off*/
+    *,
+    *::before,
+    *::after
+    .nav-panel,
+    .nav-backdrop {
+        transition: none;
+    }
+}
+/*NAVIGATION PANEL*/
+
+.nav-backdrop{
+    position: fixed;    /* fixes the position, so it doesnt move even when the page scrolls */
+    inset: 0;   /* means all (top, right, left, bottom) are 0*/
+    z-index: 10;    /*controls stacking, higher number is drawn on top, like panel is 20 so it sits above the back drop*/
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;     /* removes from the tab order and screen readers when the panel is closed, not display: none because
+    display cant be animated*/
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+.nav-backdrop-is-open{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+.nav-panel{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    width: min(28rem, 88vw);    /*28 rem wide but not more than 88% of the viewport width, min() makes it choose the smaller value*/
+    overflow-y: auto;
+    background-color: var(--color-bg);
+    border-left: var(--border);
+    visibility: hidden;
+    transform: translateX(100%);    /*shifts the panel by its own width, so it waits completely off-screen, translateX(0%) is its resting
+    place, transform is a cheap and easy way to animate movement*/
+    transition: transform 0.3s ease, visibility 0s linear 0.3s; /* means to switch the visbility after 0.3 seconds and taking 0 seconds to
+    switch, so the content stays visible until the panel is closed*/ 
+}
+.nav-panel.is-open{     /*an element has both classes, adding is-open in js flips every property in that rule at once*/
+    visibility: visible;
+    transform: none;
+    transition: transform 0.3s ease;
+}
+.nav-panel-top{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: var(--border);
+}
+.nav-list{
+    margin: 0;      /*removes the default indentation*/
+    padding: 0;     /*removes the default indentation*/
+    list-style: none;   /*removes the bullet points*/
+}
+.nav-list-li{
+    border-bottom: var(--border);
+}
+.nav-list a{    /*uses a display block which makes the whole row clickable and and gives it padding*/
+    display: block;
+    padding: var(--scale-3);
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: inherit;
+    text-decoration: none;
+}
+.nav-list-a:hover {
     background-color: var(--color-text);
-    color: var(--color-bg); 
+    color: var(--color-bg);
+}
+.nav-list a[aria-current="page"] {      /*is an attribute selector, it matches links that have that attribute. js will add it only to the 
+    current pages link, a thick underline marks the page without relying on the color*/
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.2em;
 }

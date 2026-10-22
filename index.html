@@ -8,6 +8,13 @@
     font style files before linking the css file, so the font is ready before the css starts running-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <script>    //inline script       
+    try {   //does t a smaller version of the code we wrote for the theme of the page
+        if(localStorage.getItem("theme") === "dark"){
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    } catch(error) {}   
+    </script>
     <link rel="stylesheet" href="css/style.css"> <!--linking the css file-->
 </head>
 <body>
@@ -20,18 +27,39 @@
         <button class="header-cell header-button" id="theme-toggle" type="button">Light</button>    <!--introducing the button
         type button is used so that it isnt just a clickable link that takes us to another site
         it works with a keyboard whereas div doesnt, it stops the button from behaving like a submit button-->
-        <button class="header-cell header-button" id="menu-button" aria-label="Open navigation menu"> <!--aria-label gives the 
+        <button class="header-cell header-button" id="menu-button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open navigation menu"> <!--aria-label gives the 
             button a spoken name-->
             <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">     <!--this is a tiny drawing in the code
                 viewbox makes a 24 x 24 drawing area , path d draws three horizontal lines M3 7 means move to x=3, y=7
                 h18 means a horizontal line 18 units to the right same for y=12 and y =17. aria hidden hides the icon from screen
                 readers since aria label already describes it.-->
-                <path d="M3 7h18M3 12h18M3 17h18" fill="none" stroke="currentColor" stroke-width="1.5"/>    <!--stroke currentcolor
+                <path d="M3 7h18M3 12h18M3 17h18" fill="none" stroke="currentColor" stroke-width="2.5"/>    <!--stroke currentcolor
                 uses the same color as the text to make the lines, so in dark mode the lines will automatically turn to white-->
             </svg>      <!--why svg and not ☰ because the character's look depends on the font the visitor uses, svg makes it 
             universal-->
         </button>
     </header>
+    <div class="nav-backdrop" id="nav-backdrop"></div>  <!--nav-backdrop is an empty div that will give that dimmed overlay, it has no 
+    content, just the look-->
+    <nav class="nav-panel" id="nav-panel" aria-label="Main navigation">     <!--nav makes a block of navigation links and aria label
+        names it, because the footer will also have a nav block, so for screen readers to identify the difference-->
+        <div class="nav-panel-top">
+            <span class="header-cell">Menu</span>
+            <button class="header-cell header-button" id="menu-close" type="button" aria-label="Close navigation menu">     <!-- headercell
+                and headerbutton are reused so that the close button gets the styling and hover for free and its size mathes ☰ so it replaces
+                it perfectly when the navigation bar opens-->
+                <svg width="24" height="24" viewbox="0 0 24 24" aria-hidden="true">     <!--to draw the cross sign for the close button-->
+                    <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor"  stroke-width="3"/>
+                </svg>
+            </button>
+        </div>
+        <ul class="nav-list">
+            <li><a href="index.html">MAIN</a></li>      <!--unordered lists, for the links in the navigation block-->
+            <li><a href="gallery.html">GALLERY</a></li>
+            <li><a href="work.html">MY WORK</a></li>
+            <li><a href="contact.html">CONTACT ME</a></li>
+        </ul>
+    </nav>
     <main>      <!-- marks pages main content-->
         <section class="section">   <!-- groups related content-->
             <div class="container">     <!-- goes inside a section-->
